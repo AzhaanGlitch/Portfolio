@@ -9,25 +9,29 @@ import Experience from "./sections/Experience";
 import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
-
+import React from "react";
+import IntroAnimation from "./components/IntroAnimation";
 
 
 export default function App(){
-  return(
-    <div className="relative gradient text-white">
-      {/* <ParticlesBackground/> */}
-      <CustomCursor/>
-
-
-      <Navbar/>
-      <Home/>
-      <About/>
-      <Skills/>
-      <Projects/>
-      <Experience/>
-      <Testimonials/>
-      <Contact/>
-      <Footer/>
-    </div>
-  )
+const [introDone, setIntroDone] = React.useState(false);
+return(
+  <>
+  {!introDone && <IntroAnimation onFinish = {() => setIntroDone(true)}/>}
+  {introDone && (
+  <div className="relative gradient text-white">
+    <CustomCursor/>
+    <Navbar/>
+    <Home/>
+    <About/>
+    <Skills/>
+    <Projects/>
+    <Experience/>
+    <Testimonials/>
+    <Contact/>
+    <Footer/>
+  </div>
+  )}
+  </>
+)
 }
