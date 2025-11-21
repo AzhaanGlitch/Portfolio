@@ -3,6 +3,7 @@ import ParticlesBackground from "../components/ParticlesBackground";
 import { motion } from "framer-motion";
 import React from "react";
 import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
+import avator from "../assets/avator.png";
 
 const socials = [
   {icon : FaGithub, label: "GitHub", href: "https://github.com/AzhaanGlitch"},
@@ -46,7 +47,7 @@ export default function Home(){
         h-[70vw] sm:h-[50vw] md:h-[40vw]
         max-w-[500px] max-h-[500px]
         rounded-full
-        bg-gradient-to-r from-[#302b6] via-[#00bf8f] to-[#1cd8d2]
+        bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#E53935]
         opacity-30 sm:opacity-20 md:opacity-10
         blur-[100px] sm:blur-[130px] md:blur-[150px]
         animate-pulse"
@@ -57,7 +58,7 @@ export default function Home(){
         h-[70vw] sm:h-[50vw] md:h-[40vw]
         max-w-[500px] max-h-[500px]
         rounded-full
-        bg-gradient-to-r from-[#302b6] via-[#00bf8f] to-[#1cd8d2]
+        bg-gradient-to-r from-[#C69C00] via-[#C84F00] to-[#9B1D1A]
         opacity-30 sm:opacity-20 md:opacity-10
         blur-[100px] sm:blur-[130px] md:blur-[150px]
         animate-pulse delay-500
@@ -82,7 +83,7 @@ export default function Home(){
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text
-            bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
+            bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#E53935] drop-shadow-lg"
             initial = {{opacity: 0, y: 40}}
             animate = {{opacity: 1, y: 0}}
             transition = {{duration: 1}}
@@ -99,8 +100,8 @@ export default function Home(){
             animate = {{opacity: 1, y: 0}}
             transition = {{delay: 0.4, duration: 0.8}}
             >
-                Driven and results-focused B.Tech CSE student specializing in AI/ML and Full-Stack Development.<br/>
-                I have hands on experience developing and deploying complex, real-world applications. I am dedicated to leveraging technology for impactful solutions.
+              Driven and results-focused B.Tech CSE student specializing in AI/ML and Full-Stack Development.<br/>
+              I have hands on experience developing and deploying complex, real-world applications. I am dedicated to leveraging technology for impactful solutions.
             </motion.p>
 
             <motion.div className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6"
@@ -110,7 +111,7 @@ export default function Home(){
             >
               <a href="#projects"
               className="px-6 py-3 rounded-full font-medium text-lg text-white
-              bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63]
+              bg-gradient-to-r from-[#C69C00] via-[#C84F00] to-[#9B1D1A]
               shadow-lg hover:scale-105 transition-all"
               >View My Work</a>
               <a href="/Resume.pdf"
@@ -119,7 +120,7 @@ export default function Home(){
               >My Resume</a>
             </motion.div>
 
-            <div className="mt-10 flex - gap-5 text-2xl md:text-3xl justify-center lg:justify-start">
+            <div className="mt-10 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start">
               {socials.map(({icon: Icon, label, href}) => (
                 <motion.a href={href} key={label} target="_blank" 
                 aria-label = {label} 
@@ -136,6 +137,23 @@ export default function Home(){
             </div>
           </div>
         </div>
+
+        <div className="relative hidden lg:flex items-end justify-end overflow-visible">
+
+          <motion.img src={avator} alt="Azhaan" 
+          className="object-contain select-none pointer-events-none" 
+          style={{
+            width: "140%",
+            height: "auto",
+            maxHeight: "110vh",
+            marginRight: "-20%"
+          }}
+          initial = {{opacity: 0, y: 40, scale: 0.98}}
+          animate = {{opacity: 1, y: 0, scale: 1}}
+          transition = {{delay: 0.2, duration: 0.8}}
+          />
+        </div>
+
       </div>
     </section>
   )
