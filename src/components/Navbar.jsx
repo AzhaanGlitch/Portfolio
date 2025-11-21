@@ -91,7 +91,7 @@ export default function Navbar() {
           <a
             href="#contact"
             // CORRECTED: text white -> text-white
-            className="bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300"
+            className="bg-gradient-to-r from-[#C69C00] via-[#C84F00] to-[#9B1D1A] text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300"
           >
             Reach Out
           </a>
