@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import p from "../assets/p.jpg";
+import p from "/assets/p.jpg";
 
 export default function About() {
   const glows = [

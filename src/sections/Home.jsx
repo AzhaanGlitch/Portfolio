@@ -3,7 +3,7 @@ import ParticlesBackground from "../components/ParticlesBackground";
 import { motion } from "framer-motion";
 import React from "react";
 import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
-import avator from "../assets/avator.png";
+import avator from "/assets/avator.png";
 
 const socials = [
   {icon : FaGithub, label: "GitHub", href: "https://github.com/AzhaanGlitch"},

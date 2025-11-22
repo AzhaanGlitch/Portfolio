@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import img1 from "../assets/img1.png";
-import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
-import img4 from "../assets/img4.png";
-import img5 from "../assets/img5.png";
-import photo1 from "../assets/photo1.png";
-import photo2 from "../assets/photo2.png";
-import photo3 from "../assets/photo3.png";
-import photo4 from "../assets/photo4.png";
-import photo5 from "../assets/photo5.png";
+import img1 from "/assets/img1.png";
+import img2 from "/assets/img2.png";
+import img3 from "/assets/img3.png";
+import img4 from "/assets/img4.png";
+import img5 from "/assets/img5.png";
+import photo1 from "/assets/photo1.png";
+import photo2 from "/assets/photo2.png";
+import photo3 from "/assets/photo3.png";
+import photo4 from "/assets/photo4.png";
+import photo5 from "/assets/photo5.png";
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import { WiDayCloudy } from "react-icons/wi";
 
