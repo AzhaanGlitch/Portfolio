@@ -66,10 +66,10 @@ export default function Projects() {
         />
       </div>
 
-      {/* Scrollable Content - Increased height for better pacing */}
+      {/* Scrollable Content - Reduced height for faster transitions */}
       <div 
         ref={containerRef}
-        style={{ height: `${projects.length * 150}vh` }}
+        style={{ height: `${projects.length * 120}vh` }}
         className="relative"
       >
         <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
@@ -97,7 +97,7 @@ export default function Projects() {
           <div className="relative flex-1 flex items-center justify-center px-4 sm:px-8">
             <div className="relative w-full max-w-6xl h-[70vh]">
               {projects.map((project, index) => {
-                // Each card gets more scroll space - improved timing
+                // Each card gets scroll space
                 const startProgress = index / projects.length;
                 const endProgress = (index + 1) / projects.length;
                 
@@ -107,24 +107,24 @@ export default function Projects() {
                   [0, 1]
                 );
 
-                // Slower, smoother transitions
-                // Card enters from 0 to 0.4, stays centered from 0.4 to 0.7, exits from 0.7 to 1
+                // Faster transitions - card enters, shows briefly, then exits smoothly
+                // Enter: 0 to 0.35, Center: 0.35 to 0.55, Exit: 0.55 to 1
                 const x = useTransform(
                   cardProgress, 
-                  [0, 0.4, 0.7, 1], 
+                  [0, 0.35, 0.55, 1], 
                   ["100%", "0%", "0%", "-100%"]
                 );
                 
                 const opacity = useTransform(
                   cardProgress, 
-                  [0, 0.2, 0.4, 0.7, 0.9, 1], 
-                  [0, 0.5, 1, 1, 0.5, 0]
+                  [0, 0.2, 0.35, 0.55, 0.75, 1], 
+                  [0, 0.7, 1, 1, 0.7, 0]
                 );
                 
                 const scale = useTransform(
                   cardProgress, 
-                  [0, 0.4, 0.7, 1], 
-                  [0.85, 1, 1, 0.85]
+                  [0, 0.35, 0.55, 1], 
+                  [0.9, 1, 1, 0.9]
                 );
 
                 return (

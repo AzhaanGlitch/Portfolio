@@ -24,11 +24,11 @@ export default function Skills(){
     { icon: <FaPython />, name: "Python", color: "#3776AB" },
     { icon: <SiMongodb />, name: "MongoDb", color: "#47A248" },
     { icon: <SiMongoose />, name: "Mongoose", color: "#880000" },
-    { icon: <SiExpress />, name: "ExpressJs", color: "#000000" },
+    { icon: <SiExpress />, name: "ExpressJs", color: "#FFFFFF" },
     { icon: <FaReact />, name: "React", color: "#61DAFB" },
     { icon: <FaNodeJs />, name: "NodeJs", color: "#339933" },
     { icon: <FaGitAlt />, name: "Git", color: "#F05032" },
-    { icon: <FaGithub />, name: "GitHub", color: "#181717" },
+    { icon: <FaGithub />, name: "GitHub", color: "#FFFFFF" },
     { icon: <GrMysql />, name: "MySQL", color: "#4479A1" },
     { icon: <RiTailwindCssFill />, name: "TailwindCss", color: "#06B6D4" },
     { icon: <SiRedux />, name: "Redux", color: "#764ABC" },
@@ -170,9 +170,10 @@ export default function Skills(){
           }}
         >
           {skills.map((skill, index) => {
-            // Calculate position on semicircle
+            // Calculate evenly spaced positions on semicircle
             const totalSkills = skills.length;
-            const baseAngle = (index / totalSkills) * 180; // Spread across 180 degrees
+            const angleSpacing = 180 / (totalSkills + 1); // Equal spacing across 180 degrees
+            const baseAngle = angleSpacing * (index + 1); // Start from first spacing
             const angle = baseAngle + rotation;
             
             // Semicircle math (bottom half)
@@ -200,6 +201,16 @@ export default function Skills(){
               opacity = (180 - normalizedAngle) / 20;
             }
             
+            // Calculate scale for depth effect (smaller at edges)
+            let scale = 1;
+            if (normalizedAngle >= 0 && normalizedAngle <= 180) {
+              if (normalizedAngle < 30) {
+                scale = 0.7 + (normalizedAngle / 30) * 0.3;
+              } else if (normalizedAngle > 150) {
+                scale = 0.7 + ((180 - normalizedAngle) / 30) * 0.3;
+              }
+            }
+            
             return (
               <motion.div
                 key={index}
@@ -210,21 +221,24 @@ export default function Skills(){
                   transform: 'translate(-50%, -50%)',
                   opacity: opacity,
                 }}
-                whileHover={{ scale: 1.3 }}
+                whileHover={{ scale: scale * 1.3 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-black/40 backdrop-blur-sm border border-white/10 shadow-xl"
+                <div className="flex flex-col items-center gap-2"
                   style={{
-                    minWidth: '80px',
+                    transform: `scale(${scale})`,
                   }}
                 >
                   <div 
-                    className="text-5xl sm:text-6xl transition-all duration-300"
-                    style={{ color: skill.color }}
+                    className="text-5xl sm:text-6xl md:text-7xl transition-all duration-300 drop-shadow-lg"
+                    style={{ 
+                      color: skill.color,
+                      filter: 'drop-shadow(0 0 8px rgba(0, 0, 0, 0.5))'
+                    }}
                   >
                     {skill.icon}
                   </div>
-                  <p className="text-xs sm:text-sm text-white/90 font-medium whitespace-nowrap">
+                  <p className="text-xs sm:text-sm text-white font-medium whitespace-nowrap bg-black/40 px-2 py-1 rounded backdrop-blur-sm">
                     {skill.name}
                   </p>
                 </div>
