@@ -10,21 +10,7 @@ export default function About() {
 
   return (
     <section id="about"
-      className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden">
-      
-      {/* Background image continues from Home - shows lower part */}
-      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none z-[5]">
-        <img 
-          src="/assets/avator.png" 
-          alt="Background" 
-          className="w-full h-full object-contain object-right-bottom opacity-40 lg:opacity-70"
-          style={{
-            objectPosition: 'right bottom',
-            transform: 'translateY(10%)'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/50 to-black"></div>
-      </div>
+      className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden" style={{ zIndex: 1 }}>
 
       {/* Animated gradient blobs */}
       <div className="absolute inset-0 pointer-events-none z-[1]">

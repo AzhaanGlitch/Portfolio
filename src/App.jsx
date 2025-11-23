@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
-import ParticlesBackground from "./components/ParticlesBackground";
 import CustomCursor from "./components/CustomCursor";
+import AvatarBridge from "./components/AvatarBridge";
 import About from "./sections/About";
 import Home from "./sections/Home";
 import Skills from "./sections/Skills";
@@ -21,8 +21,14 @@ return(
   <div className="relative gradient text-white">
     <CustomCursor/>
     <Navbar/>
-    <Home/>
-    <About/>
+    
+    {/* Container for Home and About sections with shared avatar */}
+    <div className="relative">
+      <AvatarBridge />
+      <Home/>
+      <About/>
+    </div>
+    
     <Skills/>
     <Projects/>
     <Experience/>

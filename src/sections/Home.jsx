@@ -40,26 +40,11 @@ export default function Home(){
   }, [subIndex, index, deleting, roles])
 
   return(
-    <section id="home" className="w-full min-h-screen relative bg-black overflow-hidden">
+    <section id="home" className="w-full min-h-screen relative bg-black overflow-hidden" style={{ zIndex: 1 }}>
       <ParticlesBackground/>
-      
-      {/* Background Image - Higher z-index, positioned to show upper part */}
-      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none z-[5]">
-        <img 
-          src="/assets/avator.png" 
-          alt="Background" 
-          className="w-full h-full object-contain object-right-top opacity-40 lg:opacity-70"
-          style={{
-            objectPosition: 'right top',
-            transform: 'translateY(-10%)'
-          }}
-        />
-        {/* Gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/50 to-black"></div>
-      </div>
 
       {/* Animated gradient blobs */}
-      <div className="absolute inset-0 z-[1]">
+      <div className="absolute inset-0 z-[1] pointer-events-none">
         <div className="absolute -top-32 -left-32
         w-[70vw] sm:w-[50vw] md:w-[40vw]
         h-[70vw] sm:h-[50vw] md:h-[40vw]

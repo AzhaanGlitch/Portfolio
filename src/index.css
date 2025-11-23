@@ -25,6 +25,35 @@ body {
   scroll-snap-type: none;
 }
 
+/* Avatar Bridge - Static large image spanning both sections */
+.avatar-static-bridge {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  pointer-events: none !important;
+}
+
+.avatar-full-image {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none !important;
+}
+
+/* Ensure sections work properly with the static avatar */
+#home, #about {
+  position: relative;
+}
+
+/* Ensure content stays above particles but below avatar */
+#home > div,
+#about > div {
+  position: relative;
+  z-index: 2;
+}
+
 /* Projects section optimizations */
 #projects {
   perspective: 1000px;
@@ -163,5 +192,13 @@ img[loading="lazy"].loaded {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  .avatar-bridge-container {
+    position: absolute !important;
+  }
+  
+  .avatar-static-bridge {
+    position: absolute !important;
   }
 }
