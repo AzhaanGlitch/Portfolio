@@ -11,6 +11,7 @@ import photo4 from "/assets/photo4.png";
 import photo5 from "/assets/photo5.png";
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import { WiDayCloudy } from "react-icons/wi";
+import ParticlesBackground from "../components/ParticlesBackground";
 
 const useIsMobile = (query = "(max-width: 639px)") => {
   const [isMobile, setIsMobile] = useState(
@@ -37,31 +38,31 @@ export default function Projects() {
     {
       title: "Arvialo",
       link: "https://arvialo.vercel.app/",
-      bgColor: "linear-gradient(45deg, #702499ff, #000000ff)",
+      bgColor: "linear-gradient(45deg, #000000ff, #000000ff)",
       image: isMobile ? photo1 : img1
     },
     {
       title: "Crave",
       link: "https://crave-recipe-finder.onrender.com/",
-      bgColor: "linear-gradient(45deg, #ffbb00ff, #ff9900ff)",
+      bgColor: "linear-gradient(45deg, #000000ff, #280c01ff)",
       image: isMobile ? photo2 : img2
     },
     {
       title: "VigilCam",
       link: "https://azhaanglitch-vigilcam.hf.space/",
-      bgColor: "linear-gradient(45deg, #00e1ffff, #000000ff)",
+      bgColor: "linear-gradient(45deg, #000000ff, #00374dff)",
       image: isMobile ? photo3 : img3
     },
     {
       title: "Smart Accident Detector",
       link: "https://smart-accident-detector-frontend-v1-one.vercel.app/",
-      bgColor: "linear-gradient(45deg, #008cffff, #000000ff)",
+      bgColor: "linear-gradient(45deg, #000000ff, #060141ff)",
       image: isMobile ? photo4 : img4
     },
     {
       title: "AtmoSphere",
       link: "https://atmo-sphere-weather.vercel.app/",
-      bgColor: "linear-gradient(45deg, #211746ff, #000000ff)",
+      bgColor: "linear-gradient(45deg, #000000ff, #000000ff)",
       image: isMobile ? photo5 : img5
     }
   ], [isMobile]
@@ -87,12 +88,11 @@ export default function Projects() {
       className="relative text-white"
       style={{
         height: `${100 * projects.length}vh`,
-        // Changed to backgroundImage for gradient effect
         backgroundImage: activeProject.bgColor,
-        // Change transition property to backgroundImage
         transition: "background-image 400ms ease"
       }}
     >
+      <ParticlesBackground/>
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
         <h2 className={` text-3xl font-semibold z-10 text-center ${isMobile ? "mt-4" : "mt-8"
           }`}>

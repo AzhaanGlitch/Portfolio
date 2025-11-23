@@ -1,6 +1,7 @@
 import { useScroll, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import ParticlesBackground from "../components/ParticlesBackground";
 
 const experiences = [
   {
@@ -114,6 +115,7 @@ const lineSize = useTransform(scrollYProgress, (v) => `${v*100}%`)
 
   return(
     <section id="experience" className="relative bg-black text-white">
+      <ParticlesBackground/>
       <div ref={sceneRef}
       style={{height: `${SCENE_HEIGHT_VH}vh`, minHeight: "120vh"}}
       className="relative"
