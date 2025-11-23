@@ -13,11 +13,7 @@ export default function About() {
       className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden" style={{ zIndex: 1 }}>
 
       {/* Animated gradient blobs */}
-      <div className="absolute inset-0 pointer-events-none z-[1]">
-        {glows.map((c, i) => (
-          <div key={i} className={`absolute rounded-full bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#E53935] animate-pulse ${c}`} />
-        ))}
-      </div>
+
 
       <div className="relative z-10 max-w-6xl w-full mx-auto px-6 md:px-10 lg:px-12 py-20 flex flex-col gap-12">
         <motion.div className="flex flex-col md:flex-row items-center md:items-stretch gap-8"

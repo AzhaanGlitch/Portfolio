@@ -18,11 +18,19 @@ h1, h2{
 /* Smooth scrolling for the entire page */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 0;
 }
 
 /* Remove any scroll snap that might interfere */
 body {
   scroll-snap-type: none;
+  overscroll-behavior: none;
+}
+
+/* Ensure smooth transitions between sections */
+section {
+  scroll-margin-top: 0;
+  transition: all 0.3s ease-out;
 }
 
 /* Avatar Bridge - Static large image spanning both sections */
@@ -54,9 +62,17 @@ body {
   z-index: 2;
 }
 
+/* Skills section smooth transitions */
+#skills {
+  position: relative;
+  isolation: isolate;
+}
+
 /* Projects section optimizations */
 #projects {
   perspective: 1000px;
+  position: relative;
+  isolation: isolate;
 }
 
 /* Horizontal card animations */
@@ -183,6 +199,31 @@ img[loading="lazy"].loaded {
   opacity: 1;
 }
 
+/* Improve scroll performance */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Smooth section transitions */
+#about,
+#skills,
+#projects,
+#experience,
+#contact {
+  position: relative;
+  z-index: auto;
+}
+
+/* Ensure smooth transitions between About and Skills */
+#about + #skills {
+  margin-top: 0;
+}
+
+/* Ensure smooth transitions between Skills and Projects */
+#skills + #projects {
+  margin-top: 0;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -200,5 +241,9 @@ img[loading="lazy"].loaded {
   
   .avatar-static-bridge {
     position: absolute !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
   }
 }

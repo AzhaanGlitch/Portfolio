@@ -29,12 +29,13 @@ export default function Skills() {
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end end"]
+    offset: ["start end", "end start"]
   });
 
-  // Diagonal movement for entire content
-  const contentX = useTransform(scrollYProgress, [0, 1], ["-40%", "40%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  // Smooth diagonal movement with easing
+  const contentX = useTransform(scrollYProgress, [0, 0.5, 1], ["-30%", "0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 0.5, 1], ["-15%", "0%", "15%"]);
+  const rotation = useTransform(scrollYProgress, [0, 0.5, 1], [15, 20, 25]);
 
   // Split skills into 3 rows with 5 skills each
   const row1 = skills.slice(0, 5);
@@ -48,29 +49,25 @@ export default function Skills() {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ scale: 1.15 }}
+      whileHover={{ scale: 1.2 }}
     >
       <div
-        className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-all duration-300"
-        style={{
-          boxShadow: `0 10px 30px ${skill.color}20`,
-          transform: 'rotate(45deg)',
-        }}
+        className="relative flex items-center justify-center"
       >
-        {/* Glow effect on hover */}
+        {/* Glow effect on hover - no box, just glow */}
         <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-2xl scale-150"
           style={{
-            background: `radial-gradient(circle, ${skill.color}40, transparent 70%)`,
+            background: `radial-gradient(circle, ${skill.color}60, transparent 70%)`,
           }}
         />
 
+        {/* Icon without box */}
         <div
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl transition-all duration-300 relative z-10"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl transition-all duration-300 relative z-10"
           style={{
             color: skill.color,
-            filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))",
-            transform: 'rotate(-45deg)',
+            filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7))",
           }}
         >
           {skill.icon}
@@ -84,59 +81,31 @@ export default function Skills() {
       id="skills"
       ref={sectionRef}
       className="relative w-full bg-black text-white overflow-hidden"
-      style={{ height: "300vh" }}
+      style={{ minHeight: "150vh" }}
     >
-      {/* Diagonally moving content container */}
+      {/* Diagonally moving content container with smooth transitions */}
       <motion.div
-        className="fixed inset-0 flex items-center justify-center"
+        className="sticky top-0 h-screen flex items-center justify-center"
         style={{
           x: contentX,
           y: contentY,
+          paddingTop: "50vh",
         }}
       >
-        {/* Animated gradient blobs that move with content */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#E53935] opacity-20 blur-[120px] animate-pulse" />
-          <div className="absolute top-[30%] right-[10%] w-[350px] h-[350px] rounded-full bg-gradient-to-r from-[#E53935] via-[#FF8C00] to-[#FFD700] opacity-15 blur-[100px] animate-pulse" style={{ animationDelay: '0.5s' }} />
-          <div className="absolute bottom-[20%] left-[20%] w-[500px] h-[500px] rounded-full bg-gradient-to-r from-[#FF8C00] via-[#FFD700] to-[#E53935] opacity-20 blur-[140px] animate-pulse" style={{ animationDelay: '1s' }} />
-        </div>
 
-        {/* Moving particles overlay */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          {[...Array(30)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Content wrapper with diagonal rotation */}
-        <div className="relative w-[200vw] h-[200vh] flex items-center justify-center">
-          <div 
+        {/* Content wrapper with smooth diagonal rotation */}
+        <div className="relative w-full max-w-[90vw] h-full flex items-center justify-center overflow-visible">
+          <motion.div 
             className="relative"
             style={{
-              transform: 'rotate(20deg)',
+              rotate: rotation,
               transformOrigin: 'center',
             }}
           >
             <div 
-              className="flex flex-col items-center gap-16 md:gap-24 lg:gap-32"
+              className="flex flex-col items-center gap-12 md:gap-14 lg:gap-16"
             >
-              {/* Header - Now properly rotated */}
+              {/* Header */}
               <motion.div
                 className="text-center"
                 initial={{ opacity: 0, y: -30 }}
@@ -152,12 +121,11 @@ export default function Skills() {
                 </p>
               </motion.div>
 
-              {/* Skills grid - tilted layout */}
-              <div className="flex flex-col items-center gap-12 md:gap-16 lg:gap-20">
+              {/* Skills grid - tilted layout with more spacing */}
+              <div className="flex flex-col items-center gap-12 md:gap-14 lg:gap-16">
                 {/* Row 1 */}
                 <motion.div 
-                  className="flex items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16"
-                  style={{ transform: 'rotate(0deg)' }}
+                  className="flex items-center gap-10 sm:gap-12 md:gap-16 lg:gap-20"
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -170,8 +138,8 @@ export default function Skills() {
 
                 {/* Row 2 - Offset to create diagonal effect */}
                 <motion.div 
-                  className="flex items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16"
-                  style={{ marginLeft: '5rem', transform: 'rotate(3deg)' }}
+                  className="flex items-center gap-10 sm:gap-12 md:gap-16 lg:gap-20"
+                  style={{ marginLeft: '5rem' }}
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -184,8 +152,8 @@ export default function Skills() {
 
                 {/* Row 3 - Further offset */}
                 <motion.div 
-                  className="flex items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16"
-                  style={{ marginLeft: '10rem', transform: 'rotate(6deg)' }}
+                  className="flex items-center gap-10 sm:gap-12 md:gap-16 lg:gap-20"
+                  style={{ marginLeft: '10rem' }}
                   initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -197,7 +165,7 @@ export default function Skills() {
                 </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 
