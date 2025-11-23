@@ -28,14 +28,16 @@ export default function Footer(){
           whileInView = {{opacity: 1, y: 0}}
           transition = {{duration: 0.8}}
       >
-        <h1 className="font-semibold leading-none text-white text-center select-none"
+        <h1 className="font-semibold leading-none text-white text-center select-none break-words"
         style={{
-          fontSize: "clamp(3rem,5vw,14rem)",
+          fontSize: "clamp(2rem, 8vw, 14rem)",
           letterSpacing: "0.02em",
-          lineHeight: 0.9,
-          padding: "0 3vw",
-          whiteSpace: "nowrap",
-          textShadow: "0 2px 18 rgba(0, 0, 0, 0.45)"
+          lineHeight: 1.1,
+          padding: "0 1rem",
+          maxWidth: "100%",
+          wordBreak: "break-word",
+          overflowWrap: "break-word",
+          textShadow: "0 2px 18px rgba(0, 0, 0, 0.45)"
         }}>
           Azhaan Ali Siddiqui
         </h1>
@@ -59,7 +61,7 @@ export default function Footer(){
           ))}
         </div>
 
-        <p className="text-gray-300 italic max-w-xl">
+        <p className="text-gray-300 italic max-w-xl px-4">
           "In JS, 'undefined' is just the universe's way of saying 'try async/await instead."
         </p>
         <p className="text-xs text-gray-400">

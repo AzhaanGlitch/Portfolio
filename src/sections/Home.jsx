@@ -94,10 +94,15 @@ export default function Home(){
               Heyoo, I'm
             </motion.h1>
             
-            <motion.h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-lg whitespace-nowrap"
+            <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white drop-shadow-lg break-words"
             initial = {{opacity: 0, y: 40}}
             animate = {{opacity: 1, y: 0}}
             transition = {{duration: 1, delay: 0.2}}
+            style={{
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              hyphens: 'auto'
+            }}
             >
               Azhaan Ali Siddiqui
             </motion.h1>
