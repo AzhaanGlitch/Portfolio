@@ -14,19 +14,22 @@ export default function AvatarBridge() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Don't render avatar on mobile devices
+  if (isMobile) return null;
+
   return (
     <>
-      {/* Single Large Avatar Image - Statically positioned across Home and About */}
+      {/* Single Large Avatar Image - Statically positioned across Home and About - Desktop Only */}
       <div 
         className="avatar-static-bridge"
         style={{
           position: 'absolute',
-          top: '10vh', // Shifted down to avoid navbar
-          right: isMobile ? '-10%' : '-5%', // Shift right to zoom in
-          width: isMobile ? '95%' : '45%', // Increased size
-          height: '220vh', // Increased height to fill both sections better
+          top: '10vh',
+          right: '-5%',
+          width: '45%',
+          height: '220vh',
           pointerEvents: 'none',
-          zIndex: 9999, // Highest z-index - above everything
+          zIndex: 9999,
           overflow: 'visible',
         }}
       >
@@ -43,9 +46,9 @@ export default function AvatarBridge() {
             height: '100%',
             objectFit: 'contain',
             objectPosition: 'right center',
-            opacity: isMobile ? 0.6 : 0.85,
+            opacity: 0.85,
             filter: 'drop-shadow(0 0 80px rgba(255, 140, 0, 0.5))',
-            transform: 'scale(1.4)', // Zoom in the image
+            transform: 'scale(1.4)',
           }}
           loading="eager"
         />
