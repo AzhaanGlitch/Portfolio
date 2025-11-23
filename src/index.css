@@ -13,3 +13,87 @@ h1, h2{
         background: linear-gradient(-45deg, #302b63, #00bf8f, #1cd8d2);
     }
 }
+
+/* Add these styles to your existing src/index.css file */
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Stacking card container optimization */
+#projects {
+  perspective: 1000px;
+}
+
+/* Card stacking depth effect */
+.sticky {
+  will-change: transform;
+  transition: transform 0.3s ease-out;
+}
+
+/* Enhanced shadow for stacked cards */
+.sticky > div {
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Hover effect for project cards */
+.sticky > div:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Optimize for mobile devices */
+@media (max-width: 640px) {
+  .sticky > div:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* Ensure navbar is above stacked cards */
+nav {
+  z-index: 1000 !important;
+}
+
+/* Add smooth transition for navbar links */
+nav a {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Desktop navigation hover effects */
+@media (min-width: 768px) {
+  nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FFD700, #FF8C00, #E53935);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover::before {
+    width: 100%;
+  }
+}
+
+/* Prevent layout shift during scroll */
+.sticky {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize rendering performance */
+.sticky > div {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}

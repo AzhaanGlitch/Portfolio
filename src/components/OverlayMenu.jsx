@@ -1,9 +1,32 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
+import { useEffect, useState } from "react";
 
 export default function OverlayMenu({ isOpen, onClose }) {
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
-  const origin = isMobile ? "95% 8%" : "50% 8%";
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Force close if window is resized to desktop
+  useEffect(() => {
+    if (!isMobile && isOpen) {
+      onClose();
+    }
+  }, [isMobile, isOpen, onClose]);
+
+  // Only render on mobile devices
+  if (!isMobile) return null;
+
+  const origin = "95% 8%";
 
   return (
     <AnimatePresence>

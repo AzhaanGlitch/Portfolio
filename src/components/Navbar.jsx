@@ -15,7 +15,6 @@ export default function Navbar() {
     const homeSection = document.querySelector("#home");
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Corrected property name from isIntersection to isIntersecting
         if (entry.isIntersecting) {
           setForceVisible(true);
         } else {
@@ -38,15 +37,11 @@ export default function Navbar() {
       }
       const currentScrollY = window.scrollY;
       if (currentScrollY > lastScrollY.current) {
-        // Scrolling down - hide navbar
         setVisible(false);
-        if (timerId.current) clearTimeout(timerId.current); // Clear any pending hide timer
-      } else {
-        // Scrolling up - show navbar
-        setVisible(true);
-        // Clear old timer and set new one to hide after 3s of no scroll
         if (timerId.current) clearTimeout(timerId.current);
-        // CORRECTED: Used parentheses () instead of curly braces {} for setTimeout call
+      } else {
+        setVisible(true);
+        if (timerId.current) clearTimeout(timerId.current);
         timerId.current = setTimeout(() => {
           setVisible(false);
         }, 3000);
@@ -61,42 +56,67 @@ export default function Navbar() {
     };
   }, [forceVisible]);
 
+  const navLinks = [
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+    { name: "Experience", href: "#experience" },
+    { name: "Contact", href: "#contact" },
+  ];
+
   return (
     <>
       <nav
-        // CORRECTED: trasition-transform -> transition-transform
-        className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-transform duration-300 ${
+        className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-transform duration-300 bg-black/30 backdrop-blur-md ${
           visible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div 
-          // CORRECTED: item-center -> items-center
-          className="flex items-center space-x-2"
-        >
+        {/* Logo Section */}
+        <div className="flex items-center space-x-2">
           <img src={Logo} alt="logo" className="w-8 h-8" />
           <div className="text-2xl font-bold text-white hidden sm:block">
             Azhaan Ali Siddiqui
           </div>
         </div>
-        <div className="block lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
+
+        {/* Desktop Navigation Links - Hidden on Mobile */}
+        <div className="hidden md:flex items-center space-x-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-white font-medium hover:text-orange-400 transition-colors duration-300 relative group"
+            >
+              {link.name}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#E53935] transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Hamburger Menu - Only Visible Below 768px */}
+        <div className="block md:hidden">
           <button
             onClick={() => setMenuOpen(true)}
             className="text-white text-3xl focus:outline-none"
-            aria-label="open Menu"
+            aria-label="Open Menu"
           >
             <FiMenu />
           </button>
         </div>
-        <div className="hidden lg:block">
+
+        {/* CTA Button - Desktop Only */}
+        <div className="hidden md:block">
           <a
             href="#contact"
-            // CORRECTED: text white -> text-white
-            className="bg-gradient-to-r from-[#C69C00] via-[#C84F00] to-[#9B1D1A] text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300"
+            className="bg-gradient-to-r from-[#C69C00] via-[#C84F00] to-[#9B1D1A] text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 hover:scale-105 transition-all duration-300"
           >
             Reach Out
           </a>
         </div>
       </nav>
+
+      {/* Overlay Menu - Only for Mobile */}
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
