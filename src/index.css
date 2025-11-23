@@ -2,6 +2,7 @@
 
 body{
     font-family: "poppins", sans-serif;
+    overflow-x: hidden;
 }
 
 h1, h2{
@@ -14,26 +15,30 @@ h1, h2{
     }
 }
 
-/* Add these styles to your existing src/index.css file */
-
 /* Smooth scrolling for the entire page */
 html {
   scroll-behavior: smooth;
 }
 
-/* Stacking card container optimization */
+/* Remove any scroll snap that might interfere */
+body {
+  scroll-snap-type: none;
+}
+
+/* Projects section optimizations */
 #projects {
   perspective: 1000px;
 }
 
-/* Card stacking depth effect */
-.sticky {
-  will-change: transform;
-  transition: transform 0.3s ease-out;
+/* Horizontal card animations */
+.project-card {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Enhanced shadow for stacked cards */
-.sticky > div {
+/* Enhanced shadow for project cards */
+.project-card-shadow {
   box-shadow: 
     0 10px 40px rgba(0, 0, 0, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.2),
@@ -41,34 +46,48 @@ html {
 }
 
 /* Hover effect for project cards */
-.sticky > div:hover {
-  transform: translateY(-8px) scale(1.02);
+.project-card-shadow:hover {
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.6),
     0 4px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Optimize for mobile devices */
-@media (max-width: 640px) {
-  .sticky > div:hover {
-    transform: translateY(-4px) scale(1.01);
+/* Seamless background transition between sections */
+#home, #about {
+  position: relative;
+}
+
+/* Fixed background image spans multiple sections */
+.fixed-bg-image {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 200vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (max-width: 1024px) {
+  .fixed-bg-image {
+    width: 100%;
+    opacity: 0.3;
   }
 }
 
-/* Ensure navbar is above stacked cards */
+/* Ensure navbar is above all content */
 nav {
   z-index: 1000 !important;
 }
 
-/* Add smooth transition for navbar links */
-nav a {
-  position: relative;
-  overflow: hidden;
-}
-
 /* Desktop navigation hover effects */
 @media (min-width: 768px) {
+  nav a {
+    position: relative;
+    overflow: hidden;
+  }
+  
   nav a::before {
     content: '';
     position: absolute;
@@ -86,14 +105,86 @@ nav a {
   }
 }
 
-/* Prevent layout shift during scroll */
-.sticky {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
 /* Optimize rendering performance */
-.sticky > div {
+.optimize-render {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Smooth gradient transitions */
+.gradient-bg {
+  background: linear-gradient(-45deg, #302b63, #00bf8f, #1cd8d2);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Progress bar animation */
+.progress-bar {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card entrance animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent layout shift during transitions */
+.no-layout-shift {
+  contain: layout;
+}
+
+/* Optimize for mobile devices */
+@media (max-width: 640px) {
+  .project-card-shadow:hover {
+    transform: none;
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Loading state optimization */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

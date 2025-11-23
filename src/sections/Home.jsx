@@ -3,7 +3,6 @@ import ParticlesBackground from "../components/ParticlesBackground";
 import { motion } from "framer-motion";
 import React from "react";
 import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
-import avator from "/assets/avator.png";
 
 const socials = [
   {icon : FaGithub, label: "GitHub", href: "https://github.com/AzhaanGlitch"},
@@ -41,8 +40,24 @@ export default function Home(){
   }, [subIndex, index, deleting, roles])
 
   return(
-    <section id = "home" className="w-full h-screen relative bg-black overflow-hidden">
+    <section id="home" className="w-full h-screen relative bg-black overflow-hidden">
       <ParticlesBackground/>
+      
+      {/* Background Image - Fixed positioning spans multiple sections */}
+      <div className="fixed top-0 right-0 w-full lg:w-1/2 h-[200vh] pointer-events-none z-0">
+        <img 
+          src="/assets/avator.png" 
+          alt="Background" 
+          className="w-full h-full object-cover object-right opacity-30 lg:opacity-60"
+          style={{
+            objectPosition: 'right top',
+          }}
+        />
+        {/* Gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/50 to-black"></div>
+      </div>
+
+      {/* Animated gradient blobs */}
       <div className="absolute inset-0">
         <div className="absolute -top-32 -left-32
         w-[70vw] sm:w-[50vw] md:w-[40vw]
@@ -67,8 +82,8 @@ export default function Home(){
         "></div>
       </div>
 
-      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col justify-center h-full text-center lg:text-left relative">
+      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 flex items-center">
+        <div className="w-full lg:w-3/5 text-center lg:text-left">
           <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
             <motion.div
             className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6rem]"
@@ -92,7 +107,7 @@ export default function Home(){
             >
               Heyoo, I'm
               <br/>
-              <span className=" text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl lg:whitespace-nowrap">
+              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
                 Azhaan Ali Siddiqui
               </span>
             </motion.h1>
@@ -118,7 +133,7 @@ export default function Home(){
               >View My Work</a>
               <a href="/Resume.pdf"
               download
-              className="px-6 py-3 rounded-full text-lg font-medium text-black bg-white hover-gray-200 shadow-lg hover:scale-105 transition-all"
+              className="px-6 py-3 rounded-full text-lg font-medium text-black bg-white hover:bg-gray-200 shadow-lg hover:scale-105 transition-all"
               >My Resume</a>
             </motion.div>
 
@@ -139,23 +154,6 @@ export default function Home(){
             </div>
           </div>
         </div>
-
-        <div className="relative hidden lg:flex items-end justify-end overflow-visible">
-
-          <motion.img src={avator} alt="Azhaan" 
-          className="object-contain select-none pointer-events-none" 
-          style={{
-            width: "140%",
-            height: "auto",
-            maxHeight: "110vh",
-            marginRight: "-20%"
-          }}
-          initial = {{opacity: 0, y: 40, scale: 0.98}}
-          animate = {{opacity: 1, y: 0, scale: 1}}
-          transition = {{delay: 0.2, duration: 0.8}}
-          />
-        </div>
-
       </div>
     </section>
   )
