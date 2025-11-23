@@ -70,6 +70,7 @@ export default function Skills() {
           style={{
             color: skill.color,
             filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))",
+            transform: 'rotate(-45deg)',
           }}
         >
           {skill.icon}
@@ -128,24 +129,16 @@ export default function Skills() {
           <div 
             className="relative"
             style={{
-              transform: 'rotate(-30deg)',
+              transform: 'rotate(20deg)',
               transformOrigin: 'center',
             }}
           >
             <div 
               className="flex flex-col items-center gap-16 md:gap-24 lg:gap-32"
-              style={{
-                transform: 'rotate(30deg)',
-                transformOrigin: 'center',
-              }}
             >
-              {/* Header */}
+              {/* Header - Now properly rotated */}
               <motion.div
                 className="text-center"
-                style={{
-                  transform: 'rotate(45deg)',
-                  transformOrigin: 'center',
-                }}
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
