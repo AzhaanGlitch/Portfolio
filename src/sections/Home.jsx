@@ -40,17 +40,18 @@ export default function Home(){
   }, [subIndex, index, deleting, roles])
 
   return(
-    <section id="home" className="w-full h-screen relative bg-black overflow-hidden">
+    <section id="home" className="w-full min-h-screen relative bg-black overflow-hidden">
       <ParticlesBackground/>
       
-      {/* Background Image - Fixed positioning spans multiple sections */}
-      <div className="fixed top-0 right-0 w-full lg:w-1/2 h-[200vh] pointer-events-none z-0">
+      {/* Background Image - Higher z-index, positioned to show upper part */}
+      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none z-[5]">
         <img 
           src="/assets/avator.png" 
           alt="Background" 
-          className="w-full h-full object-cover object-right opacity-30 lg:opacity-60"
+          className="w-full h-full object-contain object-right-top opacity-40 lg:opacity-70"
           style={{
             objectPosition: 'right top',
+            transform: 'translateY(-10%)'
           }}
         />
         {/* Gradient overlay for better text readability */}
@@ -58,7 +59,7 @@ export default function Home(){
       </div>
 
       {/* Animated gradient blobs */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-[1]">
         <div className="absolute -top-32 -left-32
         w-[70vw] sm:w-[50vw] md:w-[40vw]
         h-[70vw] sm:h-[50vw] md:h-[40vw]
@@ -82,8 +83,8 @@ export default function Home(){
         "></div>
       </div>
 
-      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 flex items-center">
-        <div className="w-full lg:w-3/5 text-center lg:text-left">
+      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 flex items-center min-h-screen">
+        <div className="w-full lg:w-3/5 text-center lg:text-left py-20">
           <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
             <motion.div
             className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6rem]"
@@ -106,10 +107,14 @@ export default function Home(){
             transition = {{duration: 1}}
             >
               Heyoo, I'm
-              <br/>
-              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-                Azhaan Ali Siddiqui
-              </span>
+            </motion.h1>
+            
+            <motion.h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-lg whitespace-nowrap"
+            initial = {{opacity: 0, y: 40}}
+            animate = {{opacity: 1, y: 0}}
+            transition = {{duration: 1, delay: 0.2}}
+            >
+              Azhaan Ali Siddiqui
             </motion.h1>
 
             <motion.p className="mt-6 text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"

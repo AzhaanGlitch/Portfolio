@@ -12,21 +12,22 @@ export default function About() {
     <section id="about"
       className="min-h-screen w-full flex items-center justify-center relative bg-black text-white overflow-hidden">
       
-      {/* Continue the same background image from Home section */}
-      <div className="fixed top-0 right-0 w-full lg:w-1/2 h-[200vh] pointer-events-none z-0">
+      {/* Background image continues from Home - shows lower part */}
+      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full pointer-events-none z-[5]">
         <img 
           src="/assets/avator.png" 
           alt="Background" 
-          className="w-full h-full object-cover object-right opacity-30 lg:opacity-60"
+          className="w-full h-full object-contain object-right-bottom opacity-40 lg:opacity-70"
           style={{
-            objectPosition: 'right center',
+            objectPosition: 'right bottom',
+            transform: 'translateY(10%)'
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/50 to-black"></div>
       </div>
 
       {/* Animated gradient blobs */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none z-[1]">
         {glows.map((c, i) => (
           <div key={i} className={`absolute rounded-full bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#E53935] animate-pulse ${c}`} />
         ))}

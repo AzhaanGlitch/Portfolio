@@ -1,7 +1,6 @@
 import { useScroll, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import ParticlesBackground from "../components/ParticlesBackground";
 
 const experiences = [
   {
@@ -115,13 +114,23 @@ const lineSize = useTransform(scrollYProgress, (v) => `${v*100}%`)
 
   return(
     <section id="experience" className="relative bg-black text-white">
-      <ParticlesBackground/>
+      {/* Fixed Particles Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <canvas 
+          className="absolute top-0 left-0 w-full h-screen"
+          style={{
+            background: 'transparent'
+          }}
+        />
+      </div>
+
+      {/* Scrollable Content */}
       <div ref={sceneRef}
       style={{height: `${SCENE_HEIGHT_VH}vh`, minHeight: "120vh"}}
       className="relative"
       >
         <div className="sticky top-0 h-screen flex flex-col">
-          <h2 className="text-4xl sm:text-5xl font-semibold mt-5 text-center">
+          <h2 className="text-4xl sm:text-5xl font-semibold mt-5 text-center z-10">
             Experience
           </h2>
           <div className="flex flex-1 items-center justify-center px-6 pb-10">

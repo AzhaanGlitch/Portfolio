@@ -53,29 +53,6 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Seamless background transition between sections */
-#home, #about {
-  position: relative;
-}
-
-/* Fixed background image spans multiple sections */
-.fixed-bg-image {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 200vh;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@media (max-width: 1024px) {
-  .fixed-bg-image {
-    width: 100%;
-    opacity: 0.3;
-  }
-}
-
 /* Ensure navbar is above all content */
 nav {
   z-index: 1000 !important;

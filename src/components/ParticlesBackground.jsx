@@ -9,9 +9,16 @@ export default function ParticlesBackground(){
     if (!canvas) return; 
     const ctx = canvas.getContext("2d");
 
+    // Set canvas size to viewport
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    setCanvasSize();
+
     let particles = [];
     const particleCount = 50;
-    const colors = ["rgba(255, 255, 255, 7)"]; 
+    const colors = ["rgba(255, 255, 255, 0.7)"]; 
 
     class Particle{
       constructor(){
@@ -54,12 +61,11 @@ export default function ParticlesBackground(){
     }
 
     function handleResize(){
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      setCanvasSize();
       createParticles();
     }
     
-    handleResize();
+    createParticles();
     window.addEventListener("resize", handleResize);
 
     let animationId;
@@ -80,8 +86,15 @@ export default function ParticlesBackground(){
   return(
     <canvas 
     ref = {canvasRef}
-    className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-      
+    className="fixed top-0 left-0 w-screen h-screen pointer-events-none z-0"
+    style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh'
+    }}
+    >
     </canvas>
   )
 }
